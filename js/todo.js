@@ -62,7 +62,7 @@
 
     // function to scale x value
     let xScale = d3.scaleLinear()
-      .domain([limits.xMin, limits.xMax]) // give domain buffer room
+      .domain([limits.xMin - 0.5, limits.xMax + 0.5]) // give domain buffer room
       .range([50, 1000]);
 
     // xMap returns a scaled x value from a row of data
@@ -72,7 +72,7 @@
     let xAxis = d3.axisBottom().scale(xScale);
     svgContainer.append("g")
       .attr('transform', 'translate(0, 450)')
-      .call(xAxis.ticks(10));
+      .call(xAxis.ticks(20));
 
     // return y value from a row of data
     let yValue = function(d) { return +d[y]}
@@ -116,7 +116,7 @@
       .enter()
       .append("rect")
         .attr("class", "databars")
-        .attr("x", (d) => {return xMap(d) + 5})
+        .attr("x", (d) => {return xMap(d) - 15})
         .attr("y", yMap)
         .attr("width", 30)
         .attr("height", (d) => {return 450 - yMap(d)})
@@ -151,7 +151,7 @@
           .data(data)
           .enter()
           .append('text')
-            .attr("x", (d) => {return xMap(d) + 8})
+            .attr("x", (d) => {return xMap(d) - 11})
             .attr("y", (d) => {return yMap(d) - 3})
             .text((d) => {return d["Avg. Viewers (mil)"]});
 
