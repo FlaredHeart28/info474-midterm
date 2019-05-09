@@ -72,7 +72,7 @@
     let xAxis = d3.axisBottom().scale(xScale);
     svgContainer.append("g")
       .attr('transform', 'translate(0, 450)')
-      .call(xAxis);
+      .call(xAxis.ticks(10));
 
     // return y value from a row of data
     let yValue = function(d) { return +d[y]}
