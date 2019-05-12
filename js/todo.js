@@ -165,11 +165,44 @@
               .style('stroke', 'black')
               .style('stroke-dasharray', (3,3))
               .attr('stroke-width', 2);
+
+
         svgContainer
           .append("text")
             .attr("x", 900)
             .attr("y", mapFunctions.yAvg - 5)
             .text("Average: " + mapFunctions.yAvgVal);
+
+
+        var legend = svgContainer.selectAll('.legend')                    
+        .data(data)                                
+        .enter()                                             
+        .append('g')                                         
+          .attr('class', 'legend')                             
+          .attr('transform', (d) => {
+              if(d.Data == "Estimated") {
+                return 'translate(150, 80)'
+              } else {
+                return 'translate(150, 50)'
+              }
+            
+            });                                                    
+
+      legend.append('rect')                                     
+        .attr('width', 20)                         
+        .attr('height', 20)
+        .attr('fill', (d) => {
+          if(d.Data == "Estimated") {
+            return "grey";
+          } else {
+            return "steelblue";
+          }
+        })                                                       
+        
+      legend.append('text')                                     
+        .attr('x', 23)              
+        .attr('y', 15)              
+        .text(function(d) { return d.Data; });  
 
   }
 
